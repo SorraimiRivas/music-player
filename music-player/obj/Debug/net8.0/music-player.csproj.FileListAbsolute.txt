@@ -1,0 +1,14 @@
+/Users/kuma/Developer/csharp/music-player/music-player/bin/Debug/net8.0/music-player
+/Users/kuma/Developer/csharp/music-player/music-player/bin/Debug/net8.0/music-player.deps.json
+/Users/kuma/Developer/csharp/music-player/music-player/bin/Debug/net8.0/music-player.runtimeconfig.json
+/Users/kuma/Developer/csharp/music-player/music-player/bin/Debug/net8.0/music-player.dll
+/Users/kuma/Developer/csharp/music-player/music-player/bin/Debug/net8.0/music-player.pdb
+/Users/kuma/Developer/csharp/music-player/music-player/obj/Debug/net8.0/music-player.GeneratedMSBuildEditorConfig.editorconfig
+/Users/kuma/Developer/csharp/music-player/music-player/obj/Debug/net8.0/music-player.AssemblyInfoInputs.cache
+/Users/kuma/Developer/csharp/music-player/music-player/obj/Debug/net8.0/music-player.AssemblyInfo.cs
+/Users/kuma/Developer/csharp/music-player/music-player/obj/Debug/net8.0/music-player.csproj.CoreCompileInputs.cache
+/Users/kuma/Developer/csharp/music-player/music-player/obj/Debug/net8.0/music-player.dll
+/Users/kuma/Developer/csharp/music-player/music-player/obj/Debug/net8.0/refint/music-player.dll
+/Users/kuma/Developer/csharp/music-player/music-player/obj/Debug/net8.0/music-player.pdb
+/Users/kuma/Developer/csharp/music-player/music-player/obj/Debug/net8.0/music-player.genruntimeconfig.cache
+/Users/kuma/Developer/csharp/music-player/music-player/obj/Debug/net8.0/ref/music-player.dll
