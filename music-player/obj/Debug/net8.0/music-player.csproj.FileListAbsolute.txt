@@ -12,3 +12,4 @@
 /Users/kuma/Developer/csharp/music-player/music-player/obj/Debug/net8.0/music-player.pdb
 /Users/kuma/Developer/csharp/music-player/music-player/obj/Debug/net8.0/music-player.genruntimeconfig.cache
 /Users/kuma/Developer/csharp/music-player/music-player/obj/Debug/net8.0/ref/music-player.dll
+/Users/kuma/Developer/csharp/music-player/music-player/obj/Debug/net8.0/music-player.sourcelink.json

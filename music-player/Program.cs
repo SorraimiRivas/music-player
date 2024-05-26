@@ -1,4 +1,8 @@
 ﻿class Program
 {
-    static void Main() { }
+    static void Main()
+    {
+        var musicPlayer = new MusicPlayer();
+        musicPlayer.Init();
+    }
 }

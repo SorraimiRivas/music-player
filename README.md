@@ -14,7 +14,7 @@ Simple console music player that has all the basics functionalities of a regular
 
 ## Model
 
-[ ] ID, name, duration, and author.
+[x] ID, name, duration, and author.
 
 ## Music List
 
