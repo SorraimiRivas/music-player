@@ -14,26 +14,26 @@ Simple console music player that has all the basics functionalities of a regular
 
 ## Model
 
-[x] ID, name, duration, and author.
+- [x] ID, name, duration, and author.
 
 ## Music List
 
-[x] Add songs.\n
-[x] Delete songs.
-[ ] Edit song.
+- [x] Add songs.\n
+- [x] Delete songs.
+- [ ] Edit song.
 
 ## Player
 
-[ ] Play songs.
-[ ] Play random songs.
-[ ] Play next song.
-[ ] Play previous song.
-[ ] Pause song.
-[ ] Volume up.
-[ ] Volume down.
+- [ ] Play songs.
+- [ ] Play random songs.
+- [ ] Play next song.
+- [ ] Play previous song.
+- [ ] Pause song.
+- [ ] Volume up.
+- [ ] Volume down.
 
 ## While playing
 
-[ ] Show state (Playing or Paused).
-[ ] Show song's name and duration.
-[ ] Volume goes from 0 to 100.
+- [ ] Show state (Playing or Paused).
+- [ ] Show song's name and duration.
+- [ ] Volume goes from 0 to 100.
