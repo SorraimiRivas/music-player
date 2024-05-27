@@ -7,29 +7,29 @@ Simple console music player that has all the basics functionalities of a regular
 # Concepts and Patterns used
 
 * String Formating (String Interpolation, Vervatim, Escaping Methods)
-* Loops (While loop, for loop)
+* Loops (While loop, do while)
 * Higher order methods (Filter, FindAll, forEach)
 
 # Requirements
 
 ## Model
 
-[x] ID, name, duration, and author.
+[*] ID, name, duration, and author.
 
 ## Music List
 
-[ ] Add songs.
-[ ] Delete songs.
-[ ] Edit song
+[*] Add songs.
+[*] Delete songs.
+[ ] Edit song.
 
 ## Player
 
-[ ] Play songs.
+[*] Play songs.
 [ ] Play random songs.
 [ ] Play next song.
 [ ] Play previous song.
 [ ] Pause song.
-[ ] Volume up
+[ ] Volume up.
 [ ] Volume down.
 
 ## While playing
