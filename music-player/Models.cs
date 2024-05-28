@@ -10,18 +10,18 @@ public class Song
 
 public class Player
 {
+    public bool isRandom = false;
     public bool isPlaying = false;
     public Song? previousSong;
     public Song? nowPlaying;
-    public bool isRandom;
-    public int volume;
+    public int volume = 50;
 
-    public void playSong(List<Song> songs, int selectedSong)
+    public void playSong(Song song)
     {
-        if (nowPlaying?.id == songs[selectedSong].id)
+        if (nowPlaying?.id == song.id)
             return;
 
-        nowPlaying = songs[selectedSong];
+        nowPlaying = song;
         isPlaying = true;
     }
 
@@ -39,6 +39,24 @@ public class Player
 
     public void playPreviousSong(List<Song> songs, int selectedSong)
     {
-        nowPlaying = songs[selectedSong - 1];
+        nowPlaying = songs[(selectedSong - 1 + songs.Count) % songs.Count];
+    }
+
+    public void volumeUp()
+    {
+        if (volume >= 100)
+        {
+            return;
+        }
+        volume += 5;
+    }
+
+    public void volumeDown()
+    {
+        if (volume <= 0)
+        {
+            return;
+        }
+        volume -= 5;
     }
 }

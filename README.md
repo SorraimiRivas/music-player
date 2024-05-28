@@ -9,7 +9,7 @@ Simple console music player that has all the basics functionalities of a regular
 * Higher order methods (Filter, FindAll, forEach)
 * Command Pattern
 * Console Methods (ReadKey, ConsoleKey)
-* Class Instantiation.
+* Class Instantiation
 
 # Requirements
 
@@ -25,16 +25,16 @@ Simple console music player that has all the basics functionalities of a regular
 
 ### Player
 
-- [ ] Play songs.
-- [ ] Play random songs.
-- [ ] Play next song.
-- [ ] Play previous song.
-- [ ] Pause song.
-- [ ] Volume up.
-- [ ] Volume down.
+- [x] Play songs.
+- [x] Play random songs.
+- [x] Play next song.
+- [x] Play previous song.
+- [x] Pause song.
+- [x] Volume up.
+- [x] Volume down.
 
 ### While playing
 
-- [ ] Show state (Playing or Paused).
-- [ ] Show song's name and duration.
-- [ ] Volume goes from 0 to 100.
+- [x] Show state (Playing or Paused).
+- [x] Show song's name and duration.
+- [x] Volume goes from 0 to 100.

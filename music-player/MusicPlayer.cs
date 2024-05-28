@@ -4,7 +4,7 @@ public class MusicPlayer
 
     public Player player = new Player();
     public List<Song> songs = [];
-    public List<string> mainMenu = ["Music List", "Edit List", "Turn off"];
+    public List<string> mainMenu = ["Music List", "Edit List"];
     public List<string> playerMenu =
     [
         "b: \u23EE",
@@ -76,6 +76,96 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
+        songs.Add(
+            new Song
+            {
+                name = "Shape of You",
+                artist = "Ed Sheeran",
+                duration = "3:53",
+                id = GenerateId()
+            }
+        );
+        songs.Add(
+            new Song
+            {
+                name = "Rolling in the Deep",
+                artist = "Adele",
+                duration = "3:48",
+                id = GenerateId()
+            }
+        );
+        songs.Add(
+            new Song
+            {
+                name = "Uptown Funk",
+                artist = "Mark Ronson ft. Bruno Mars",
+                duration = "4:30",
+                id = GenerateId()
+            }
+        );
+        songs.Add(
+            new Song
+            {
+                name = "Happy",
+                artist = "Pharrell Williams",
+                duration = "3:53",
+                id = GenerateId()
+            }
+        );
+        songs.Add(
+            new Song
+            {
+                name = "Bad Guy",
+                artist = "Billie Eilish",
+                duration = "3:14",
+                id = GenerateId()
+            }
+        );
+        songs.Add(
+            new Song
+            {
+                name = "Someone Like You",
+                artist = "Adele",
+                duration = "4:45",
+                id = GenerateId()
+            }
+        );
+        songs.Add(
+            new Song
+            {
+                name = "Thinking Out Loud",
+                artist = "Ed Sheeran",
+                duration = "4:41",
+                id = GenerateId()
+            }
+        );
+        songs.Add(
+            new Song
+            {
+                name = "Old Town Road",
+                artist = "Lil Nas X ft. Billy Ray Cyrus",
+                duration = "2:37",
+                id = GenerateId()
+            }
+        );
+        songs.Add(
+            new Song
+            {
+                name = "Roar",
+                artist = "Katy Perry",
+                duration = "3:42",
+                id = GenerateId()
+            }
+        );
+        songs.Add(
+            new Song
+            {
+                name = "Can't Stop the Feeling!",
+                artist = "Justin Timberlake",
+                duration = "3:56",
+                id = GenerateId()
+            }
+        );
     }
 
     public void Init()
@@ -88,7 +178,9 @@ public class MusicPlayer
         do
         {
             Console.Clear();
+            Console.WriteLine("~Music Player~");
             DisplayMenu(index);
+            Console.Write("\nMove: ↑/↓   Select: Enter   Exit: Esc/");
             key = Console.ReadKey().Key;
 
             switch (key)
@@ -160,8 +252,8 @@ public class MusicPlayer
         {
             if (i == selected)
             {
-                System.Console.BackgroundColor = ConsoleColor.White;
-                System.Console.ForegroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Black;
             }
             else
             {
@@ -182,6 +274,7 @@ public class MusicPlayer
         {
             Console.Clear();
             DisplaySongs(selectedSong);
+            Console.Write("\nMove: ↑/↓  Play Song: Enter  Go back: Esc");
             key = Console.ReadKey().Key;
             switch (key)
             {
@@ -191,57 +284,12 @@ public class MusicPlayer
                 case ConsoleKey.UpArrow:
                     selectedSong = (selectedSong - 1 + songs.Count) % songs.Count;
                     break;
-                case ConsoleKey.N:
-                    player.playNextSong(songs, selectedSong);
-                    break;
-                case ConsoleKey.B:
-                    player.playPreviousSong(songs, selectedSong);
-                    break;
-                case ConsoleKey.P:
-                    player.isPlaying = !player.isPlaying;
-                    break;
                 case ConsoleKey.R:
                     player.playRandomSong(songs, selectedSong);
                     break;
                 case ConsoleKey.Enter:
-                    player.playSong(songs, selectedSong);
-                    break;
-            }
-        } while (key != ConsoleKey.Escape);
-    }
-
-    public void MainMenu()
-    {
-        int selectedSong = 0;
-
-        ConsoleKey key;
-        do
-        {
-            Console.Clear();
-            DisplaySongs(selectedSong);
-            key = Console.ReadKey().Key;
-            switch (key)
-            {
-                case ConsoleKey.DownArrow:
-                    selectedSong = (selectedSong + 1) % songs.Count;
-                    break;
-                case ConsoleKey.UpArrow:
-                    selectedSong = (selectedSong - 1 + songs.Count) % songs.Count;
-                    break;
-                case ConsoleKey.N:
-                    player.playNextSong(songs, selectedSong);
-                    break;
-                case ConsoleKey.B:
-                    player.playPreviousSong(songs, selectedSong);
-                    break;
-                case ConsoleKey.P:
-                    player.isPlaying = !player.isPlaying;
-                    break;
-                case ConsoleKey.R:
-                    player.playRandomSong(songs, selectedSong);
-                    break;
-                case ConsoleKey.Enter:
-                    player.playSong(songs, selectedSong);
+                    player.playSong(songs[selectedSong]);
+                    NowPlaying();
                     break;
             }
         } while (key != ConsoleKey.Escape);
@@ -282,9 +330,6 @@ public class MusicPlayer
                 case ConsoleKey.A:
                     AddSong();
                     break;
-                // case ConsoleKey.Enter:
-                //     player.playSong(songs, index);
-                //     break;
             }
         } while (key != ConsoleKey.Escape);
     }
@@ -349,10 +394,68 @@ public class MusicPlayer
             if (key == ConsoleKey.Y)
             {
                 songs.Remove(song);
+                if (player.nowPlaying?.id == song.id)
+                {
+                    player.isPlaying = false;
+                    player.playNextSong(songs, index + 1);
+                }
                 Console.WriteLine($"{song.name} has been deleted");
                 return;
             }
         } while (key != ConsoleKey.N);
+    }
+
+    void NowPlaying()
+    {
+        ConsoleKey key;
+        do
+        {
+            var volumeIncon = player.volume > 0 ? "🔈" : "🔇";
+            if (player.volume > 50)
+                volumeIncon = "🔊";
+            var playMode = player.isRandom ? "🔀" : "🔤";
+            var isPlaying = player.isPlaying ? "⏸️" : "▶️";
+
+            Console.Clear();
+            Console.WriteLine(
+                $@"Now playing: {player.nowPlaying?.name} - {player.nowPlaying?.artist}            {player.nowPlaying?.duration}"
+            );
+
+            Console.Write($"\n{playMode}  {isPlaying}\n");
+            Console.Write($"\n{volumeIncon}  {player.volume}%\n");
+            Console.Write(
+                $"\nRandomize/Loop: R   Previous: ←  Play/Pause: P  Next: →  Volume: ↑/↓\n"
+            );
+            var song = player.nowPlaying;
+            var index = songs.IndexOf(song!);
+            key = Console.ReadKey().Key;
+            switch (key)
+            {
+                case ConsoleKey.LeftArrow:
+                    player.playPreviousSong(songs, index);
+                    break;
+                case ConsoleKey.RightArrow:
+                    if (player.isRandom)
+                    {
+                        player.playRandomSong(songs, index);
+                        break;
+                    }
+                    player.playNextSong(songs, index);
+                    break;
+                case ConsoleKey.R:
+                    player.isRandom = !player.isRandom;
+                    break;
+                case ConsoleKey.P:
+                    player.isPlaying = !player.isPlaying;
+                    break;
+                case ConsoleKey.UpArrow:
+                    player.volumeUp();
+                    break;
+                case ConsoleKey.DownArrow:
+                    player.volumeDown();
+                    break;
+            }
+        } while (key != ConsoleKey.Escape);
     }
 
     public int GenerateId()
