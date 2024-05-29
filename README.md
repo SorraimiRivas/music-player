@@ -21,7 +21,7 @@ Simple console music player that has all the basics functionalities of a regular
 
 - [x] Add songs.
 - [x] Delete songs.
-- [ ] Edit song.
+- [x] Edit song.
 
 ### Player
 
