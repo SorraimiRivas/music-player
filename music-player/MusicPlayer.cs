@@ -178,9 +178,9 @@ public class MusicPlayer
         do
         {
             Console.Clear();
-            Console.WriteLine("~Music Player~");
+            Console.WriteLine("~* Music Player ~*");
             DisplayMenu(index);
-            Console.Write("\nMove: ↑/↓   Select: Enter   Exit: Esc/");
+            Console.Write("\nMove: ↑/↓   Select: Enter   Exit: Esc");
             key = Console.ReadKey().Key;
 
             switch (key)
@@ -224,7 +224,6 @@ public class MusicPlayer
             return;
         }
 
-        Console.WriteLine("Songs: \n");
         for (int i = 0; i < songs.Count; i++)
         {
             if (i == selectedSong)
@@ -274,7 +273,7 @@ public class MusicPlayer
         {
             Console.Clear();
             DisplaySongs(selectedSong);
-            Console.Write("\nMove: ↑/↓  Play Song: Enter  Go back: Esc");
+            Console.Write("\nMove: ↑/↓  Play Song: Enter  Go Back: Esc");
             key = Console.ReadKey().Key;
             switch (key)
             {
@@ -283,9 +282,6 @@ public class MusicPlayer
                     break;
                 case ConsoleKey.UpArrow:
                     selectedSong = (selectedSong - 1 + songs.Count) % songs.Count;
-                    break;
-                case ConsoleKey.R:
-                    player.playRandomSong(songs, selectedSong);
                     break;
                 case ConsoleKey.Enter:
                     player.playSong(songs[selectedSong]);
@@ -305,7 +301,9 @@ public class MusicPlayer
             Console.WriteLine("Edit songs: \n");
 
             DisplaySongs(index);
-            Console.Write($"\nSelect: {arrowUp}/{arrowDown}  Add: A  Delete: D  Go back: Esc/B");
+            Console.Write(
+                $"\nSelect: {arrowUp}/{arrowDown}  Add: A  Edit: E  Delete: D  Go back: Esc"
+            );
 
             key = Console.ReadKey().Key;
 
@@ -329,6 +327,9 @@ public class MusicPlayer
                     break;
                 case ConsoleKey.A:
                     AddSong();
+                    break;
+                case ConsoleKey.E:
+                    EditSong(index);
                     break;
             }
         } while (key != ConsoleKey.Escape);
@@ -379,6 +380,52 @@ public class MusicPlayer
         return;
     }
 
+    void EditSong(int index)
+    {
+        string newName = "";
+        string newArtist = "";
+        string newDuration = "";
+        var song = songs[index];
+
+        Console.Clear();
+        Console.WriteLine("Edit song: \n");
+        Console.CursorVisible = true;
+        Console.Write($"Name: {song.name} => ");
+        newName = Console.ReadLine() ?? "";
+        Console.Write($"Artist: {song.artist} => ");
+        newArtist = Console.ReadLine() ?? "";
+        Console.Write($"Duration: {song.duration} => ");
+        newDuration = Console.ReadLine() ?? "";
+
+        if (
+            !string.IsNullOrEmpty(newName)
+            && !string.IsNullOrEmpty(newArtist)
+            && !string.IsNullOrEmpty(newDuration)
+        )
+        {
+            song.name = newName;
+            song.artist = newArtist;
+            song.duration = newDuration;
+            Console.CursorVisible = false;
+
+            return;
+        }
+        Console.CursorVisible = false;
+        Console.Write("\nName, Artist or Duration can not be empty, want to try again? \n");
+        Console.WriteLine("\nY: Yes   N: No");
+        ConsoleKey key;
+        do
+        {
+            key = Console.ReadKey().Key;
+            switch (key)
+            {
+                case ConsoleKey.Y:
+                    EditSong(index);
+                    break;
+            }
+        } while (key != ConsoleKey.N);
+    }
+
     void DeleteSong(int index)
     {
         var song = songs[index];
@@ -388,8 +435,6 @@ public class MusicPlayer
             Console.Clear();
             Console.WriteLine($"Are you sure you wan't to delete {song.name} by {song.artist}? \n");
             Console.WriteLine("Y: Yes   N: No");
-            Console.Write(index);
-
             key = Console.ReadKey().Key;
             if (key == ConsoleKey.Y)
             {
@@ -424,7 +469,7 @@ public class MusicPlayer
             Console.Write($"\n{playMode}  {isPlaying}\n");
             Console.Write($"\n{volumeIncon}  {player.volume}%\n");
             Console.Write(
-                $"\nRandomize/Loop: R   Previous: ←  Play/Pause: P  Next: →  Volume: ↑/↓\n"
+                $"\nRandomize/Loop: R   Previous: ←  Play/Pause: P  Next: →  Volume: ↑/↓  Go back: Esc\n"
             );
             var song = player.nowPlaying;
             var index = songs.IndexOf(song!);
