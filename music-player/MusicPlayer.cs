@@ -1,28 +1,16 @@
 public class MusicPlayer
 {
-    public int uid = 1;
-
-    public Player player = new Player();
-    public List<Song> songs = [];
-    public List<string> mainMenu = ["Music List", "Edit List"];
-    public List<string> playerMenu =
-    [
-        "b: \u23EE",
-        "p: \u25B6/\u23F8",
-        "n: \u23ED",
-        "r: \u1F504",
-        "esc: \u21A9"
-    ];
-
-    public string arrowUp = "\u2191";
-    public string arrowDown = "\u2193";
-    public string playButton = "\u25B6";
-    public string musicNote = "\u266A";
-    public string pauseButton = "\u23F8";
+    private int Id = 1;
+    private Player Player = new Player();
+    private List<Song> Songs = [];
+    private List<string> MainMenu = ["Music List", "Edit List"];
+    private string ArrowUp = "\u2191";
+    private string ArrowDown = "\u2193";
+    private string MusicNote = "\u266A";
 
     public MusicPlayer()
     {
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Blinding Lights",
@@ -31,7 +19,7 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Levitating",
@@ -40,7 +28,7 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Peaches",
@@ -49,7 +37,7 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Save Your Tears",
@@ -58,7 +46,7 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Good 4 U",
@@ -67,7 +55,7 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Solo un Eco",
@@ -76,7 +64,7 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Shape of You",
@@ -85,7 +73,7 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Rolling in the Deep",
@@ -94,7 +82,7 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Uptown Funk",
@@ -103,7 +91,7 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Happy",
@@ -112,7 +100,7 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Bad Guy",
@@ -121,7 +109,7 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Someone Like You",
@@ -130,7 +118,7 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Thinking Out Loud",
@@ -139,7 +127,7 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Old Town Road",
@@ -148,7 +136,7 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Roar",
@@ -157,7 +145,7 @@ public class MusicPlayer
                 id = GenerateId()
             }
         );
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = "Can't Stop the Feeling!",
@@ -186,10 +174,10 @@ public class MusicPlayer
             switch (key)
             {
                 case ConsoleKey.DownArrow:
-                    index = (index + 1) % mainMenu.Count;
+                    index = (index + 1) % MainMenu.Count;
                     break;
                 case ConsoleKey.UpArrow:
-                    index = (index - 1 + mainMenu.Count) % mainMenu.Count;
+                    index = (index - 1 + MainMenu.Count) % MainMenu.Count;
                     break;
                 case ConsoleKey.Enter:
                     Controller(index);
@@ -201,12 +189,12 @@ public class MusicPlayer
         Console.Clear();
     }
 
-    void Controller(int index)
+    private void Controller(int index)
     {
         switch (index)
         {
             case 0:
-                SongList();
+                ShowSongList();
                 break;
             case 1:
                 EditSongList();
@@ -216,19 +204,19 @@ public class MusicPlayer
         }
     }
 
-    public void DisplaySongs(int selectedSong)
+    private void DisplaySongs(int index)
     {
-        if (songs.Count == 0)
+        if (Songs.Count == 0)
         {
-            Console.WriteLine("You list is empty. Try adding some songs!");
+            Console.WriteLine("You list is empty. Try adding some Songs!");
             return;
         }
 
-        for (int i = 0; i < songs.Count; i++)
+        for (int i = 0; i < Songs.Count; i++)
         {
-            if (i == selectedSong)
+            if (i == index)
             {
-                Console.BackgroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Green;
                 Console.ForegroundColor = ConsoleColor.Black;
             }
             else
@@ -236,22 +224,22 @@ public class MusicPlayer
                 Console.ResetColor();
             }
 
-            Song song = songs[i];
+            Song song = Songs[i];
             Console.WriteLine(
-                $"{song.name} - {song.artist} ({song.duration}) {(player.nowPlaying?.id == song.id ? $"{musicNote}  " : "")}"
+                $"{song.name} - {song.artist} ({song.duration}) {(Player.nowPlaying?.id == song.id ? $"{MusicNote}  " : string.Empty)}"
             );
         }
         Console.ResetColor();
     }
 
-    void DisplayMenu(int selected)
+    private void DisplayMenu(int selected)
     {
         System.Console.WriteLine("\n");
-        for (int i = 0; i < mainMenu.Count; i++)
+        for (int i = 0; i < MainMenu.Count; i++)
         {
             if (i == selected)
             {
-                Console.BackgroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Green;
                 Console.ForegroundColor = ConsoleColor.Black;
             }
             else
@@ -259,56 +247,56 @@ public class MusicPlayer
                 System.Console.ResetColor();
             }
 
-            System.Console.WriteLine($"{mainMenu[i]}");
+            System.Console.WriteLine($"{MainMenu[i]}");
         }
         Console.ResetColor();
     }
 
-    public void SongList()
+    private void ShowSongList()
     {
-        var selectedSong = 0;
+        var index = 0;
 
         ConsoleKey key;
         do
         {
             Console.Clear();
-            DisplaySongs(selectedSong);
+            DisplaySongs(index);
             Console.Write("\nMove: ↑/↓  Play Song: Enter  Go Back: Esc");
             key = Console.ReadKey().Key;
             switch (key)
             {
                 case ConsoleKey.DownArrow:
-                    selectedSong = (selectedSong + 1) % songs.Count;
+                    index = (index + 1) % Songs.Count;
                     break;
                 case ConsoleKey.UpArrow:
-                    selectedSong = (selectedSong - 1 + songs.Count) % songs.Count;
+                    index = (index - 1 + Songs.Count) % Songs.Count;
                     break;
                 case ConsoleKey.Enter:
-                    player.playSong(songs[selectedSong]);
+                    Player.playSong(Songs[index]);
                     NowPlaying();
                     break;
             }
         } while (key != ConsoleKey.Escape);
     }
 
-    void EditSongList()
+    private void EditSongList()
     {
         var index = 0;
         ConsoleKey key;
         do
         {
             Console.Clear();
-            Console.WriteLine("Edit songs: \n");
+            Console.WriteLine("Edit Songs: \n");
 
             DisplaySongs(index);
             Console.Write(
-                $"\nSelect: {arrowUp}/{arrowDown}  Add: A  Edit: E  Delete: D  Go back: Esc"
+                $"\nSelect: {ArrowUp}/{ArrowDown}  Add: A  Edit: E  Delete: D  Go back: Esc"
             );
 
             key = Console.ReadKey().Key;
 
             if (
-                songs.Count == 0
+                Songs.Count == 0
                 && (key == ConsoleKey.UpArrow || key == ConsoleKey.DownArrow || key == ConsoleKey.D)
             )
             {
@@ -317,10 +305,10 @@ public class MusicPlayer
             switch (key)
             {
                 case ConsoleKey.DownArrow:
-                    index = (index + 1) % songs.Count;
+                    index = (index + 1) % Songs.Count;
                     break;
                 case ConsoleKey.UpArrow:
-                    index = (index - 1 + songs.Count) % songs.Count;
+                    index = (index - 1 + Songs.Count) % Songs.Count;
                     break;
                 case ConsoleKey.D:
                     DeleteSong(index);
@@ -335,7 +323,7 @@ public class MusicPlayer
         } while (key != ConsoleKey.Escape);
     }
 
-    void AddSong()
+    private void AddSong()
     {
         Console.Clear();
         Console.WriteLine("Add new song: \n");
@@ -367,7 +355,7 @@ public class MusicPlayer
         string artist = Console.ReadLine() ?? "";
         Console.Write("Duration: ");
         string duration = Console.ReadLine() ?? "";
-        songs.Add(
+        Songs.Add(
             new Song
             {
                 name = name,
@@ -380,12 +368,12 @@ public class MusicPlayer
         return;
     }
 
-    void EditSong(int index)
+    private void EditSong(int index)
     {
         string newName = "";
         string newArtist = "";
         string newDuration = "";
-        var song = songs[index];
+        var song = Songs[index];
 
         Console.Clear();
         Console.WriteLine("Edit song: \n");
@@ -426,9 +414,9 @@ public class MusicPlayer
         } while (key != ConsoleKey.N);
     }
 
-    void DeleteSong(int index)
+    private void DeleteSong(int index)
     {
-        var song = songs[index];
+        var song = Songs[index];
         ConsoleKey key;
         do
         {
@@ -438,11 +426,11 @@ public class MusicPlayer
             key = Console.ReadKey().Key;
             if (key == ConsoleKey.Y)
             {
-                songs.Remove(song);
-                if (player.nowPlaying?.id == song.id)
+                Songs.Remove(song);
+                if (Player.nowPlaying?.id == song.id)
                 {
-                    player.isPlaying = false;
-                    player.playNextSong(songs, index + 1);
+                    Player.isPlaying = false;
+                    Player.playNextSong(Songs, index + 1);
                 }
                 Console.WriteLine($"{song.name} has been deleted");
                 return;
@@ -450,61 +438,61 @@ public class MusicPlayer
         } while (key != ConsoleKey.N);
     }
 
-    void NowPlaying()
+    private void NowPlaying()
     {
         ConsoleKey key;
         do
         {
-            var volumeIncon = player.volume > 0 ? "🔈" : "🔇";
-            if (player.volume > 50)
+            var volumeIncon = Player.volume > 0 ? "🔈" : "🔇";
+            if (Player.volume > 50)
                 volumeIncon = "🔊";
-            var playMode = player.isRandom ? "🔀" : "🔤";
-            var isPlaying = player.isPlaying ? "⏸️" : "▶️";
+            var playMode = Player.isRandom ? "🔀" : "🔤";
+            var isPlaying = Player.isPlaying ? "⏸️" : "▶️";
 
             Console.Clear();
             Console.WriteLine(
-                $@"Now playing: {player.nowPlaying?.name} - {player.nowPlaying?.artist}            {player.nowPlaying?.duration}"
+                $@"Now playing: {Player.nowPlaying?.name} - {Player.nowPlaying?.artist}            {Player.nowPlaying?.duration}"
             );
 
             Console.Write($"\n{playMode}  {isPlaying}\n");
-            Console.Write($"\n{volumeIncon}  {player.volume}%\n");
+            Console.Write($"\n{volumeIncon}  {Player.volume}%\n");
             Console.Write(
                 $"\nRandomize/Loop: R   Previous: ←  Play/Pause: P  Next: →  Volume: ↑/↓  Go back: Esc\n"
             );
-            var song = player.nowPlaying;
-            var index = songs.IndexOf(song!);
+            var song = Player.nowPlaying;
+            var index = Songs.IndexOf(song!);
             key = Console.ReadKey().Key;
             switch (key)
             {
                 case ConsoleKey.LeftArrow:
-                    player.playPreviousSong(songs, index);
+                    Player.playPreviousSong(Songs, index);
                     break;
                 case ConsoleKey.RightArrow:
-                    if (player.isRandom)
+                    if (Player.isRandom)
                     {
-                        player.playRandomSong(songs, index);
+                        Player.playRandomSong(Songs, index);
                         break;
                     }
-                    player.playNextSong(songs, index);
+                    Player.playNextSong(Songs, index);
                     break;
                 case ConsoleKey.R:
-                    player.isRandom = !player.isRandom;
+                    Player.isRandom = !Player.isRandom;
                     break;
                 case ConsoleKey.P:
-                    player.isPlaying = !player.isPlaying;
+                    Player.isPlaying = !Player.isPlaying;
                     break;
                 case ConsoleKey.UpArrow:
-                    player.volumeUp();
+                    Player.volumeUp();
                     break;
                 case ConsoleKey.DownArrow:
-                    player.volumeDown();
+                    Player.volumeDown();
                     break;
             }
         } while (key != ConsoleKey.Escape);
     }
 
-    public int GenerateId()
+    private int GenerateId()
     {
-        return uid++;
+        return Id++;
     }
 }

@@ -15,18 +15,18 @@ Simple console music player that has all the basics functionalities of a regular
 
 ### Model
 
-- [x] ID, name, duration, and author.
+- [x] ID, name, duration, and artist.
 
 ### Music List
 
-- [x] Add songs.
-- [x] Delete songs.
+- [x] Add Songs.
+- [x] Delete Songs.
 - [x] Edit song.
 
 ### Player
 
-- [x] Play songs.
-- [x] Play random songs.
+- [x] Play Songs.
+- [x] Play random Songs.
 - [x] Play next song.
 - [x] Play previous song.
 - [x] Pause song.

@@ -1,13 +1,12 @@
 public class Song
 {
-    public required string name;
-    public required string artist;
-
-    public required string duration;
-
-    public int id;
+    public string name { set; get; } = string.Empty;
+    public string artist { set; get; } = string.Empty;
+    public string duration { set; get; } = string.Empty;
+    public int id { set; get; }
 }
 
+//TODO: Move to its own file
 public class Player
 {
     public bool isRandom = false;
@@ -25,21 +24,21 @@ public class Player
         isPlaying = true;
     }
 
-    public void playRandomSong(List<Song> songs, int selectedSong)
+    public void playRandomSong(List<Song> Songs, int selectedSong)
     {
         previousSong = nowPlaying;
-        nowPlaying = songs[Random.Shared.Next(0, songs.Count)];
+        nowPlaying = Songs[Random.Shared.Next(0, Songs.Count)];
     }
 
-    public void playNextSong(List<Song> songs, int selectedSong)
+    public void playNextSong(List<Song> Songs, int selectedSong)
     {
         previousSong = nowPlaying;
-        nowPlaying = songs[(selectedSong + 1) % songs.Count];
+        nowPlaying = Songs[(selectedSong + 1) % Songs.Count];
     }
 
-    public void playPreviousSong(List<Song> songs, int selectedSong)
+    public void playPreviousSong(List<Song> Songs, int selectedSong)
     {
-        nowPlaying = songs[(selectedSong - 1 + songs.Count) % songs.Count];
+        nowPlaying = Songs[(selectedSong - 1 + Songs.Count) % Songs.Count];
     }
 
     public void volumeUp()
